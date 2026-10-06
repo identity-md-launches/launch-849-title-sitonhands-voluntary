@@ -1,0 +1,12 @@
+{
+  "kind": "evm_contracts",
+  "contracts": [
+    {
+      "contract": "SitOnHands",
+      "constructorArgs": [
+        "0xD34a99Bc0f67aE1bbd63C660e6d0b0dd03E263B7"
+      ]
+    }
+  ],
+  "notes": "SitOnHands is the sole application contract, defined in src/SitOnHands.sol. Its nonpayable constructor(address imd_) binds the immutable imd token to the existing Ethereum mainnet IMD ERC-20 at 0xD34a99Bc0f67aE1bbd63C660e6d0b0dd03E263B7, published at https://imd.fun/token/ and linked there to https://etherscan.io/token/0xD34a99Bc0f67aE1bbd63C660e6d0b0dd03E263B7 (address source checked 2026-10-06). The intended chain is Ethereum mainnet, chain ID 1; the deployment service selects and enforces the chain. After approval, lock(amount, durationSeconds) transfers only the caller's IMD and creates a separate, nontransferable position for each deposit. Amount must be positive and duration must be inclusively 86400 through 31536000 seconds (1 through exactly 365 days). Only the original depositor can call withdraw(positionId), once, at or after its unlockTime, to receive the exact principal. Both entry points are reentrancy guarded and verify exact token balance changes. The vault is ownerless and non-upgradeable, with no pause, early exit, deadline change, bailout, sweep, fees or yield. Direct donations are not credited as positions and cannot be rescued. No new token, pool, reward distributor, ETH funding, dependencies to deploy or initialization calls are required. Construction makes no external token calls; local mock tests and an offline constructor rehearsal do not establish live-token compatibility. The deployment script validates mainnet, token code and symbol; the token's own behavior and any administrative restrictions remain external custody assumptions."
+}
